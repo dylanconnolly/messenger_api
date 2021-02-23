@@ -12,7 +12,7 @@ Getting Started
 
 Assuming you have [Rails](https://rubyonrails.org/):
 
-1. `git clone `
+1. `git clone git@github.com:dylanconnolly/messenger_api.git`
 2. `cd messenger_api`
 3. `bundle install`
 4. `rails db:{create,migrate,seed}`
@@ -53,7 +53,6 @@ POST http://localhost:3000/api/v1/messages
     "sender_id": 1,
     "recipient_id": 2,
     "content": "This is a message sent from User 1 to User 2"
-
 }
 ```
 Example Response:
