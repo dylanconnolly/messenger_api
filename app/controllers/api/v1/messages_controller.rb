@@ -14,7 +14,7 @@ class Api::V1::MessagesController < ApplicationController
             if message.save
                 render json: MessageSerializer.new(message), status: 201
             else
-                render json: {success: 'false', error: 'Error creating message'}, status: 404
+                render json: {success: 'false', error: 'Message content must not be blank'}, status: 404
             end
         end
     end
