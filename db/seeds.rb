@@ -6,35 +6,67 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'faker'
+
 Message.delete_all
 UserConversation.delete_all
 Conversation.delete_all
 User.delete_all
 
-dyl = User.create(name: "Dylan")
-jess = User.create(name: "Jess")
-steph = User.create(name: "Steph")
+dylan = User.create(name: "Dylan")
+bob = User.create(name: "Bob")
+lauren = User.create(name: "Lauren")
+chris = User.create(name: "Chris")
 
-convo = Conversation.create
+convo1 = Conversation.create
 convo2 = Conversation.create
 convo3 = Conversation.create
+convo4 = Conversation.create
 
-UserConversation.create(conversation: convo, user: dyl)
-UserConversation.create(conversation: convo, user: jess)
-UserConversation.create(conversation: convo2, user: dyl)
-UserConversation.create(conversation: convo2, user: steph)
-UserConversation.create(conversation: convo3, user: steph)
-UserConversation.create(conversation: convo3, user: jess)
+convo1.users.push(dylan, bob)
+convo2.users.push(dylan, lauren)
+convo3.users.push(bob, lauren)
+convo4.users.push(bob, chris)
 
 
-Message.create(user: dyl, conversation: convo, message: "First text")
-Message.create(user: dyl, conversation: convo, message: "Can you hear me?")
-Message.create(user: jess, conversation: convo, message: "Hi yea I can.")
-Message.create(user: dyl, conversation: convo, message: "Cool cool")
-Message.create(user: jess, conversation: convo, message: "this works")
-Message.create(user: jess, conversation: convo, message: "Another message")
-Message.create(user: dyl, conversation: convo, message: "bye bye")
-Message.create(user: dyl, conversation: convo2, message: "Hi Steph")
-Message.create(user: steph, conversation: convo2, message: "Hi dyl")
-Message.create(user: steph, conversation: convo3, message: "Hi there")
-Message.create(user: jess, conversation: convo3, message: "Hi hi")
+10.times do
+    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence)
+end
+
+sleep 3
+
+25.times do
+    Message.create(user: bob, conversation: convo1, content: Faker::Lorem.sentence)
+end
+
+sleep 2
+
+23.times do
+    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence)
+end
+
+10.times do
+    Message.create(user: lauren, conversation: convo2, content: Faker::Lorem.sentence)
+end
+
+16.times do
+    Message.create(user: dylan, conversation: convo2, content: Faker::Lorem.sentence)
+end
+
+18.times do
+    Message.create(user: lauren, conversation: convo3, content: Faker::Lorem.sentence)
+end
+
+sleep 1
+
+15.times do
+    Message.create(user: bob, conversation: convo3, content: Faker::Lorem.sentence)
+end
+
+25.times do
+    Message.create(user: chris, conversation: convo4, content: Faker::Lorem.sentence)
+end
+
+7.times do
+    Message.create(user: bob, conversation: convo4, content: Faker::Lorem.sentence)
+end
