@@ -52,5 +52,21 @@ RSpec.describe Conversation, type: :model do
                 expect(response).to be (nil)
             end
         end
+
+        describe 'find_or_create_conversation' do
+            it 'should find an existing conversation if one already exists between users' do
+                response = Conversation.find_or_create_conversation(@user1, @user2)
+
+                expect(response).to eq(@convo1)
+            end
+
+            it 'should create a new conversation if one does not already exist between users' do
+                response = Conversation.find_or_create_conversation(@user1, @user4)
+
+                expect(Conversation.count).to eq(5)
+                expect(@user1.conversations).to eq([@convo1, @convo2, response])
+                expect(Conversation.last.users).to eq([@user1, @user4])
+            end
+        end
     end
 end
