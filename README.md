@@ -2,13 +2,6 @@ Messenger API
 ======
 Welcome to Messenger API, a simple messenger backend API built using Ruby on Rails and PostgreSQL. This backend API exposes endpoints which allow for users to send messages to one another and track conversations. Available endpoints users are able to interact are outlined below and will provide examples of successful requests and responses for each endpoint.
 
-Schema
--------
-
-The database is currently designed leveraging four tables: **Users**, **Conversations**, **Messages**, and a **UserConversations** joins table. The decision to use a **Conversations** table with relationships to messages and users was made with the idea of further expansion of functionality in mind. Right now the Conversations are limited to only ever having **two users**. If a messenger app were to allow messenging between groups of people rather than strictly between two users, the **Conversations** table and its relationships would allow for this.
-
-![Screen Shot 2021-02-23 at 1 36 15 PM](https://user-images.githubusercontent.com/54859243/108917719-69f07f80-75ed-11eb-893b-c77093c27017.png)
-
 Getting Started
 ------
 
@@ -40,6 +33,13 @@ bundle exec rspec
 `
 
 Testing covers basic validation tests of the models, unit testing of model methods, and integration testing for requests. Test cases cover happy paths for each piece of funcionality as well as several sad paths. With more time, sad path testing and validation for requests would be built out further.
+
+Schema
+-------
+
+The database is currently designed leveraging four tables: **Users**, **Conversations**, **Messages**, and a **UserConversations** joins table. The decision to use a **Conversations** table with relationships to messages and users was made with the idea of further expansion of functionality in mind. Right now the Conversations are limited to only ever having **two users**. If a messenger app were to allow messenging between groups of people rather than strictly between two users, the **Conversations** table and its relationships would allow for this.
+
+![Screen Shot 2021-02-23 at 1 36 15 PM](https://user-images.githubusercontent.com/54859243/108917719-69f07f80-75ed-11eb-893b-c77093c27017.png)
 
 Endpoints
 ------
