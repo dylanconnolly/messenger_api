@@ -37,7 +37,7 @@ This project uses RSpec as its testing suite. To run the spec while in the root 
 bundle exec rspec
 `
 
-Test driven development was used extensively during development of the API. Testing covers basic validation tests of the models, unit testing of model methods, and integration testing for requests. Test cases cover happy paths for each piece of funcionality as well as several sad paths. With more time, sad path testing and validation for requests would be built out further.
+Testing covers basic validation tests of the models, unit testing of model methods, and integration testing for requests. Test cases cover happy paths for each piece of funcionality as well as several sad paths. With more time, sad path testing and validation for requests would be built out further.
 
 Endpoints
 ------
