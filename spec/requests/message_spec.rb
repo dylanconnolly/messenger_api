@@ -20,22 +20,32 @@ describe 'when a POST request is made with a request body containing existing us
         # expect(parsed).to eq({"ahdad": "akdha"})
     end
 
-    # it "should return a 404 error if a sender or recipient name is does not exist as a user" do
-    #     user1 = User.create(name: "User1")
-    #     user2 = User.create(name: "User2")
+    it "should return a 404 error if a sender or recipient name is does not exist as a user" do
+        user1 = User.create(name: "User1")
+        user2 = User.create(name: "User2")
 
-    #     request = {
-    #         sender: "User1",
-    #         recipient: "Fake User",
-    #         content: "Hi there user that does not exist."
-    #     }
+        request = {
+            sender_id: "User1",
+            recipient_id: "Fake User",
+            content: "Hi there user that does not exist."
+        }
 
-    #     post '/api/v1/messages', params: request
+        post '/api/v1/messages', params: request
 
-    #     expect(response).to_not be_successful
+        expect(response).to_not be_successful
 
-    #     parsed = JSON.parse(response.body)
-    # end
+        parsed = JSON.parse(response.body)
+        
+        expect(parsed["error"]).to_not be_empty
+        
+        request2 = {
+            sender_id: user1.id,
+            recipient_id: 12038,
+            content: "Hi there user that does not exist."
+        }
+
+        expect(response).to_not be_successful
+    end
 end
 
 describe "when a GET request is made to /messages" do

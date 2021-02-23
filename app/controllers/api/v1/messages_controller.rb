@@ -1,17 +1,21 @@
 class Api::V1::MessagesController < ApplicationController
 
     def create
-        sender = User.find(message_params[:sender_id])
-        recipient = User.find(message_params[:recipient_id])
-
-        conversation = Conversation.find_or_create_conversation(sender, recipient)
-        
-        message = Message.new(user: sender, conversation: conversation, content: message_params[:content])
-
-        if message.save
-            render json: MessageSerializer.new(message), status: 201
+        begin
+            sender = User.find(message_params[:sender_id])
+            recipient = User.find(message_params[:recipient_id])
+        rescue ActiveRecord::RecordNotFound => error
+            render json: {"error": error.message}, status: 404
         else
-            render json: {success: 'false', error: 'Error creating message'}, status: 401
+            conversation = Conversation.find_or_create_conversation(sender, recipient)
+            
+            message = Message.new(user: sender, conversation: conversation, content: message_params[:content])
+            
+            if message.save
+                render json: MessageSerializer.new(message), status: 201
+            else
+                render json: {success: 'false', error: 'Error creating message'}, status: 404
+            end
         end
     end
 
