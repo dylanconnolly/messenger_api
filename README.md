@@ -20,6 +20,25 @@ Assuming you have [Rails](https://rubyonrails.org/):
 
 The server should now be running and you can access its endpoints through your browser or a tool such as [Postman](https://www.postman.com/).
 
+The database is seeded with messages, conversations, and users. The four users you can use when making calls are:
+| User ID | Name |
+| --- | --- |
+1 | Dylan
+2 | Bob
+3 | Lauren
+4 | Chris
+
+Testing
+---
+This project uses RSpec as its testing suite. To run the spec while in the root directory run:
+
+
+`
+bundle exec rspec
+`
+
+Test driven development was used extensively during development of the API. Testing covers basic validation tests of the models, unit testing of model methods, and integration testing for requests. Test cases cover happy paths for each piece of funcionality as well as several sad paths. With more time, sad path testing and validation for requests would be built out further.
+
 Endpoints
 ------
 ### Creating a message
@@ -152,3 +171,12 @@ Example Response:
     ]
 }
 ```
+
+Considerations, Design Decisions, Improvements
+---
+
+My main consideration for design of this API was taking into consideration future iterations of this API and making design decisions based off that. I toiled with the idea of simplifying the database structure to only having a **users** and a **messages** table and tracking the sender and recipient directly on the messages table. This, however, I felt was too limiting and would make expanding functionality in the future a more difficult proccess. By using a **conversations** table, I feel this application can be expanding more easily to allow group conversations similar to text messages or other chat applications. Additionally, when considering practical use for a messenging application, a user would expect to see their conversation history with a particular user. Having conversations house the messages between two users allows for an easy and efficient way to deliver this data to a potential front end application.
+
+A drawback of this design decision is it more complex to surface the data surrounding who the recipient of a message is without going through the conversation that a message belongs to. This is apparent when being asked to provide ALL recent messages (not recent messages between two users). The message data that is immediately surfaced could be considered less than ideal for a UI/UX designer that is hoping to use this information to display the sender and recipient of said messages.
+
+As far as improvements/next steps go, I would likely focus on building out another data level (such as a facade) to aggregate message information and be able to display more useful information (such as message's recipient) when a request is made for ALL recent messages. Building out more robust testing and ensuring the application gracefully handles errors or exceptions would be another main focus point moving forward. Given the time constraint for this project, I relied on first building happy path tests which were used to drive the development of features and returning later to consider sad paths and edge cases. I would also look to build out the conversations functionality a bit more. Although not a specified requirement, exposing an endpoint to get the conversation history between two users (rather than just one user's messages sent to a specific recipient) would provide a better user experience when viewing messages.
