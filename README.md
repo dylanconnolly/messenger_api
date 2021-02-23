@@ -7,6 +7,8 @@ Schema
 
 The database is currently designed leveraging four tables: **Users**, **Conversations**, **Messages**, and a **UserConversations** joins table. The decision to use a **Conversations** table with relationships to messages and users was made with the idea of further expansion of functionality in mind. Right now the Conversations are limited to only ever having **two users**. If a messenger app were to allow messenging between groups of people rather than strictly between two users, the **Conversations** table and its relationships would allow for this.
 
+https://user-images.githubusercontent.com/54859243/108917719-69f07f80-75ed-11eb-893b-c77093c27017.png
+
 ![Screen Shot 2021-02-23 at 1 36 15 PM](https://user-images.githubusercontent.com/54859243/108917719-69f07f80-75ed-11eb-893b-c77093c27017.png)
 
 Getting Started
