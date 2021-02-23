@@ -16,7 +16,7 @@ class Api::V1::MessagesController < ApplicationController
     end
 
     def index
-        messages = Message.all.limit(100)
+        messages = Message.get_recent_messages(message_params[:days_ago])
 
         render json: MessageSerializer.new(messages), status: 200
     end
@@ -24,6 +24,6 @@ class Api::V1::MessagesController < ApplicationController
     private
 
     def message_params
-        params.permit(:sender_id, :recipient_id, :content)
+        params.permit(:sender_id, :recipient_id, :content, :days_ago)
     end
 end
