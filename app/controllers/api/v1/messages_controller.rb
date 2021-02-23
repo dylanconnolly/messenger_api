@@ -11,8 +11,14 @@ class Api::V1::MessagesController < ApplicationController
         if message.save
             render json: MessageSerializer.new(message), status: 201
         else
-            render json: {success: 'false', error: 'Error creating message'}
+            render json: {success: 'false', error: 'Error creating message'}, status: 401
         end
+    end
+
+    def index
+        messages = Message.all.limit(100)
+
+        render json: MessageSerializer.new(messages), status: 200
     end
 
     private

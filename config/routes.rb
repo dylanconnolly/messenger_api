@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/messages', to: 'messages#create'
+      get '/messages', to: 'messages#index'
+      get '/messages/:recipient/:sender', to: 'messages_between_users#index'
     end
   end
 end
