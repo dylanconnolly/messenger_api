@@ -29,44 +29,58 @@ convo3.users.push(bob, lauren)
 convo4.users.push(bob, chris)
 
 
-10.times do
-    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence)
+4.times do
+    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 45.day))
 end
 
-sleep 3
+2.times do
+    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 15.day))
+end
 
-25.times do
+2.times do
+    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 2.day))
+end
+
+3.times do
+    Message.create(user: bob, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 30.day))
+end
+
+6.times do
+    Message.create(user: bob, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 14.day))
+end
+
+2.times do
+    Message.create(user: bob, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 6.day))
+end
+
+2.times do
     Message.create(user: bob, conversation: convo1, content: Faker::Lorem.sentence)
 end
 
-sleep 2
-
 23.times do
-    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence)
+    Message.create(user: dylan, conversation: convo1, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 28.day))
 end
 
 10.times do
-    Message.create(user: lauren, conversation: convo2, content: Faker::Lorem.sentence)
+    Message.create(user: lauren, conversation: convo2, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 14.day))
 end
 
 16.times do
-    Message.create(user: dylan, conversation: convo2, content: Faker::Lorem.sentence)
+    Message.create(user: dylan, conversation: convo2, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 16.day))
 end
 
 18.times do
-    Message.create(user: lauren, conversation: convo3, content: Faker::Lorem.sentence)
+    Message.create(user: lauren, conversation: convo3, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 22.day))
 end
 
-sleep 1
-
 15.times do
-    Message.create(user: bob, conversation: convo3, content: Faker::Lorem.sentence)
+    Message.create(user: bob, conversation: convo3, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 1.day))
 end
 
 25.times do
-    Message.create(user: chris, conversation: convo4, content: Faker::Lorem.sentence)
+    Message.create(user: chris, conversation: convo4, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 7.day))
 end
 
 7.times do
-    Message.create(user: bob, conversation: convo4, content: Faker::Lorem.sentence)
+    Message.create(user: bob, conversation: convo4, content: Faker::Lorem.sentence, created_at: (Time.zone.now - 19.day))
 end

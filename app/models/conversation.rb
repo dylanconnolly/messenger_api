@@ -2,6 +2,8 @@ class Conversation < ApplicationRecord
     has_many :user_conversations
     has_many :users, through: :user_conversations
     has_many :messages
+
+    validates_length_of :users, maximum: 2
     
     def self.find_or_create_conversation(sender, recipient)
         
@@ -23,11 +25,12 @@ class Conversation < ApplicationRecord
 
     def get_recent_messages(user_id, days_ago = nil)
         if (!days_ago)
-            messages.where(user: user_id).limit(100)
+            messages.where(user: user_id).limit(100).order('created_at DESC')
         else
             number_of_days = days_ago.to_i > 30 ? 30 : days_ago.to_i
             
-            messages.where("user_id = #{user_id} AND created_at > '#{timestamp_days_ago(number_of_days)}'")
+            messages.where("user_id = #{user_id} AND created_at > '#{timestamp_days_ago(number_of_days)}'").
+            order('created_at DESC')
         end
     end
 

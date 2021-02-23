@@ -12,10 +12,10 @@ RSpec.describe 'when a GET request is made to /messages/recipient/sender' do
         @conversation.users.push(@user1, @user2)
         conversation2.users.push(@user1, @user3)
 
-        Message.create(user: @user1, conversation: @conversation, content: "First message")
-        Message.create(user: @user2, conversation: @conversation, content: "User 2 response")
-        Message.create(user: @user1, conversation: @conversation, content: "User 1 message")
-        Message.create(user: @user1, conversation: @conversation, content: "User 1 message again")
+        Message.create(user: @user1, conversation: @conversation, content: "First message", created_at: (Time.zone.now - 4.day))
+        Message.create(user: @user2, conversation: @conversation, content: "User 2 response", created_at: (Time.zone.now - 3.day))
+        Message.create(user: @user1, conversation: @conversation, content: "User 1 message", created_at: (Time.zone.now - 3.day))
+        Message.create(user: @user1, conversation: @conversation, content: "User 1 message again", created_at: (Time.zone.now - 1.day))
         Message.create(user: @user2, conversation: @conversation, content: "User 2 message")
         
     end
@@ -29,8 +29,8 @@ RSpec.describe 'when a GET request is made to /messages/recipient/sender' do
         parsed = JSON.parse(response.body)
         
         expect(parsed["data"].length).to eq(3)
-        expect(parsed["data"][0]["attributes"]["content"]).to eq("First message")
-        expect(parsed["data"][-1]["attributes"]["content"]).to eq("User 1 message again")
+        expect(parsed["data"][0]["attributes"]["content"]).to eq("User 1 message again")
+        expect(parsed["data"][-1]["attributes"]["content"]).to eq("First message")
     end
 
     it "an empty object will be returned if no messages exist" do

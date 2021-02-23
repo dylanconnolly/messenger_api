@@ -8,11 +8,11 @@ class Message < ApplicationRecord
 
     def self.get_recent_messages(days_ago = nil)
         if (!days_ago)
-            all.limit(100)
+            all.limit(100).order('created_at DESC')
         else
             number_of_days = days_ago.to_i > 30 ? 30 : days_ago.to_i
             
-            where("created_at > '#{timestamp_days_ago(number_of_days)}'")
+            where("created_at > '#{timestamp_days_ago(number_of_days)}'").order('created_at DESC')
         end
     end
 
