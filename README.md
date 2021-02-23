@@ -78,11 +78,18 @@ STATUS: 201
 
 A GET request to `/api/v1/messages/{recipient_id}/{sender_id}` will retrieve only messages sent from the sender to the recipient. The response by default returns the 100 most recent messages. The endpoint also accepts an optional query parameter of `days_ago` (integer) to limit the response to only return messages from a certain number of days ago. The `days_ago` parameter has an upper limit of **30 days**. When a `days_ago` parameter is provided, the limit of 100 total messages is removed and all messages from the timeframe provided will be returned. Results are ordered with the most recent result appearing first.
 
-Example Request:
+Example Requests:
 ```
+# will return 100 most recent messages that user 1 has received from user 2
+
 GET http://localhost:3000/api/v1/messages/1/2
 
-# this will return messages that user 1 has received from user 2
+```
+
+```
+# will return ALL messages that user 1 has received from user 2 in the past 14 days
+
+GET http://localhost:3000/api/v1/messages/1/2?days_ago=14
 ```
 
 Example Response:
@@ -128,9 +135,17 @@ Example Response:
 
 A GET request to `/api/v1/messages` will return all messages regardless of sender/receiver. The response by default returns the 100 most recent messages. The endpoint also accepts an optional query parameter of `days_ago` (integer) to limit the response to only return messages from a certain number of days ago. The `days_ago` parameter has an upper limit of **30 days**. When a `days_ago` parameter is provided, the limit of 100 total messages is removed and all messages from the timeframe provided will be returned. Results are ordered with the most recent result appearing first.
 
-Example Request:
+Example Requests:
 ```
+# will return 100 most recent messages
+
 GET http://localhost:3000/api/v1/messages
+
+```
+```
+# will return ALL messages that were sent in the past 2 days
+
+GET http://localhost:3000/api/v1/messages?days_ago=2
 ```
 
 Example Response:
