@@ -1,8 +1,8 @@
 class Api::V1::MessagesController < ApplicationController
 
     def create
-        sender = User.find_by(name: message_params[:sender])
-        recipient = User.find_by(name: message_params[:recipient])
+        sender = User.find(message_params[:sender_id])
+        recipient = User.find(message_params[:recipient_id])
 
         conversation = Conversation.find_or_create_conversation(sender, recipient)
         
@@ -24,6 +24,6 @@ class Api::V1::MessagesController < ApplicationController
     private
 
     def message_params
-        params.permit(:sender, :recipient, :content)
+        params.permit(:sender_id, :recipient_id, :content)
     end
 end

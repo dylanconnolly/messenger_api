@@ -6,8 +6,8 @@ describe 'when a POST request is made with a request body containing existing us
         user2 = User.create(name: "User2")
         
         request = {
-            sender: "User1",
-            recipient: "User2",
+            sender_id: user1.id,
+            recipient_id: user2.id,
             content: "Hi there, User2"
         }
 
@@ -74,7 +74,7 @@ describe "when a GET request is made to /messages" do
         expect(response).to be_successful
 
         parsed = JSON.parse(response.body)
-        require 'pry'; binding.pry
+        
         expect(parsed["data"].length).to eq(40)
     end
 end

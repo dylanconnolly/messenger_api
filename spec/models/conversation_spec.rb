@@ -68,5 +68,29 @@ RSpec.describe Conversation, type: :model do
                 expect(Conversation.last.users).to eq([@user1, @user4])
             end
         end
+
+        describe "get_recent_messages" do
+            it "should take a number as string and get all messages in a conversation from that many days ago or newer" do
+                message1 = Message.create(user: @user1, conversation: @convo1, content: "Message sent today")
+
+                message2 = Message.create(user: @user1, conversation: @convo1, content: "Message sent a week ago", created_at: "Tue, 16 Feb 2021 15:17:38 UTC +00:00")
+
+                response = @convo1.get_recent_messages(@user1.id, "3")
+                response2 = @convo1.get_recent_messages(@user1.id)
+
+                expect(response).to eq([message1])
+                expect(response2).to eq([message1, message2])
+            end
+
+            it "should retrieve ALL messages in timeframe provided by days_ago parameter (not limited to 100)" do
+                110.times do
+                    Message.create(user: @user1, conversation: @convo1, content: "Message sent today")
+                end
+                
+                response = @convo1.get_recent_messages(@user1.id, "20")
+
+                expect(response.length).to eq(110)
+            end
+        end
     end
 end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/messages', to: 'messages#create'
       get '/messages', to: 'messages#index'
-      get '/messages/:recipient/:sender', to: 'messages_between_users#index'
+      get '/messages/:recipient_id/:sender_id', to: 'messages_received_from_user#index'
     end
   end
 end
