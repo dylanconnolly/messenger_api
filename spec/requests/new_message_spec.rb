@@ -14,5 +14,9 @@ describe 'when a POST request is made with a request body containing existing us
         post '/api/v1/messages', params: request
 
         expect(response).to be_successful
+
+        parsed = JSON.parse(response.body, symbolize_name: true)
+
+        expect(parsed).to eq({"ahdad": "akdha"})
     end
 end

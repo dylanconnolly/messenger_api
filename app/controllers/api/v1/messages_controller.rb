@@ -9,9 +9,10 @@ class Api::V1::MessagesController < ApplicationController
         message = Message.new(user: sender, conversation: conversation, content: message_params[:content])
 
         if message.save
-            p 'success'
+            render json: MessageSerializer.new(message), status: 201
         else
-        require 'pry'; binding.pry
+            render json: {success: 'false', error: 'Error creating message'}
+        end
     end
 
     private
